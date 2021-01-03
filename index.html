@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/index.css">
+    <title>Music Play</title>
+</head>
+
+<body>
+    <div id="musicplayer">
+        <div class="container-fluid">
+                <div class="row navigation nav">
+                    <div class="brandicon rol">
+                        <a href="javascript:;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" fill="currentColor" class="bi bi-file-music" viewBox="0.1 0.4 16 16">
+                                <path d="M10.304 3.13a1 1 0 0 1 1.196.98v1.8l-2.5.5v5.09c0 .495-.301.883-.662 1.123C7.974 12.866 7.499 13 7 13c-.5 0-.974-.134-1.338-.377-.36-.24-.662-.628-.662-1.123s.301-.883.662-1.123C6.026 10.134 6.501 10 7 10c.356 0 .7.068 1 .196V4.41a1 1 0 0 1 .804-.98l1.5-.3z"/>
+                                <path d="M4 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H4zm0 1h8a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1z"/>
+                              </svg>Music Radio
+                          </a>
+                    </div>
+
+                    <div class="col">
+                        <input type="text"  placeholder="アーティスト、曲を入力し、Enterキーを押してください" v-model ="search" @keyup.enter="searchMusic">
+                        
+                        <p class="hit-keyword">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" fill="rgb(30, 206, 141)" class="bi bi-emoji-heart-eyes" viewBox="0 0 16 16">
+                                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                <path d="M11.315 10.014a.5.5 0 0 1 .548.736A4.498 4.498 0 0 1 7.965 13a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .548-.736h.005l.017.005.067.015.252.055c.215.046.515.108.857.169.693.124 1.522.242 2.152.242.63 0 1.46-.118 2.152-.242a26.58 26.58 0 0 0 1.109-.224l.067-.015.017-.004.005-.002zM4.756 4.566c.763-1.424 4.02-.12.952 3.434-4.496-1.596-2.35-4.298-.952-3.434zm6.488 0c1.398-.864 3.544 1.838-.952 3.434-3.067-3.554.19-4.858.952-3.434z"/>
+                              </svg> 人気 :
+                              <a href="javascript:;" @click="hotKeywordSearch('米津玄师')">米津玄师</a>&nbsp;&nbsp;
+                              <a href="javascript:;" @click="hotKeywordSearch('乃木坂46')">乃木坂46</a>&nbsp;&nbsp;
+                              <a href="javascript:;" @click="hotKeywordSearch('Work Music')">Work Music</a>
+                        </p>
+                    </div>
+
+                   
+                </div>
+
+            
+           <div class="row">
+                <div class="myplayList rol">
+                    <div class="imagewrap">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="273" height="273" fill="currentColor" class="bi bi-disc" viewBox="-0.045 -0.045 16 16">
+                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                            <path d="M10 8a2 2 0 1 1-4 0 2 2 0 0 1 4 0zM8 4a4 4 0 0 0-4 4 .5.5 0 0 1-1 0 5 5 0 0 1 5-5 .5.5 0 0 1 0 1zm4.5 3.5a.5.5 0 0 1 .5.5 5 5 0 0 1-5 5 .5.5 0 0 1 0-1 4 4 0 0 0 4-4 .5.5 0 0 1 .5-.5z"/>
+                            <img class="albumImage" :src="getAlbumUrl">  
+                        </svg>
+                        
+                    </div>
+                    <div class="songInfo">
+                        <ul>
+                            <li>○ ソング: {{ getSongInfo.title }}</li>
+                            <li>○ シンガー: {{ getSongInfo.singer }}</li>
+                            <li>○ アルバム：{{ getSongInfo.albumTitle }}</li>
+                            <li>○ 出版時間：{{ getSongInfo.pulishedeTime }}</li>
+                        </ul>
+                        
+                        <div class="playerBar rol">
+                            <div class="container">
+                                <div class="audio">
+                                    <audio ref="audio" :src="getUrl" controls autoplay loop @play="play" @pause="pause">
+                                      </audio>
+                                </div>
+                            </div>
+                    </div>
+                    </div>
+                    
+                </div>
+
+                 <div class="listShow rol">
+                    <ul class="songList">
+                        <li v-for="(item, index) in musicList" class="list">  
+                            <a href="javascript:;" class="title" @click="playMusic(item.id)">
+                                <span class="song-number">{{index+1}}</span> 
+                                <span class="song-title">{{ item.name }} </span>
+                                <span class="song-singer">{{item.artists[0].name}}</span>
+                                <span class="song-album">{{item.album.name}}</span>
+                                <span class="song-duration">{{item.duration}}</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+           </div> 
+        </div>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+
+    <!-- Axios：jsDelivr CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="music.js"></script>
+
+    <script src="https://unpkg.com/dayjs@1.8.21/dayjs.min.js"></script>
+</body>
+</html>

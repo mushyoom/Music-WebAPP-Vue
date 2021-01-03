@@ -1,0 +1,244 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.container-fluid{
+    max-height: 1000px;
+}
+.navigation{
+    background-color: rgb(000, 000, 000);
+}
+
+.navigation p{
+    display: inline-block;
+    padding-left: 20px;
+    color: #eee;
+}
+
+.hit-keyword a{
+    color: #eee;
+    text-decoration: underline;
+}
+
+.hit-keyword a:hover{
+    color: rgb(209, 209, 209);
+    text-decoration: underline;
+}
+
+.brandicon{
+    width: 300px;
+    margin-left: 30px;
+    margin-right:40px;
+    text-align: center;
+}
+
+.brandicon a{
+    font-size: 37px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: rgb(30, 206, 141);
+}
+
+.brandicon a:hover{
+    text-decoration: none;
+
+}
+
+input{
+    width: 60%;
+    height: 40px;
+    margin: 10px auto;
+    padding-left: 20px;
+    border: 2px solid lightslategray;
+    border-radius: 100px;
+}
+
+/* 検索欄に入力する時、inputのボーダーラインを消す： */
+input:focus{
+    outline: none;
+}
+
+.myplayList{
+    width: 380px;
+    /* height is respositive: */
+    background-color: #333333;
+    position: fixed;
+    top: 60px;
+    bottom: 0;
+    left: 0;
+    overflow: auto;
+}
+
+/* @keyframes rotation{
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+} */
+
+/* .active {
+    animation-play-state: running;
+  }
+
+.paused {
+    animation-play-state: paused;
+  } */
+
+.imagewrap{
+    width: 280px;
+    height: 280px;
+    margin: 35px auto;
+    background: rgb(100, 100, 100);
+    position: relative;
+    z-index: 99999;
+}
+
+.albumImage{
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 280px;
+    height: 280px;
+    /* imageをrotationする場合は： */
+    /* animation: rotation 4s linear infinite; */
+    /* border-radius: 250px; */
+}
+    
+/* アルバム写真のURLがない場合、<img>のborderーlineを消す */
+img[src=""],
+img:not([src]){
+opacity:0;
+}
+
+.songInfo{
+    margin-top: 20px;
+}
+.songInfo li{
+    padding-left: 35px;
+    padding-bottom: 15px;
+    line-height: 23px;
+    color: #eee;
+}
+
+.myplayList li,
+.songList li {
+    list-style: none;
+}
+
+.songList{          /*ul style*/
+    min-height: 675px;
+    overflow: auto;
+    position: fixed;
+    left:380px;
+    top: 60px;
+    right: 0;
+    bottom: 0px;
+    background: linear-gradient(#246274, #71B280);
+}
+
+::-webkit-scrollbar{
+    width: 12px;
+    height: 12px;
+    /* background-color:linear-gradient(#3d8aa0, #71B280); */
+}
+
+::-webkit-scrollbar-track{
+    border-radius: 2px;
+    -webkit-box-shadow: inset 0 0 6px rgb(195, 214, 206);
+    background-color:#92c7a073;
+    opacity: 0.2;
+}
+
+::-webkit-scrollbar-thumb{
+    border-radius: 8px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0, .3);
+    background-color: rgb(163, 162, 162);
+}
+
+.list{
+    display: block;
+}
+
+.list .title{
+    display: inline-block;
+    width: 100%;
+    height: 50px;
+    line-height: 50px;
+    color: #eee;
+    text-decoration: none;
+}
+
+.list a:hover{
+    color: rgb(255, 255, 255);
+    border-radius: 10px;
+    background-color: rgba(126, 189, 141, 0.2);
+}
+
+.song-number, .song-title, 
+.song-singer, .song-album, 
+.song-duration{
+    display: inline-block;
+    text-align: center;
+    /* overflow */
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    word-break: break-all;
+}
+.song-number{
+    width: 10%;
+    padding-left: 40px;
+    padding-right: 20px;
+}
+
+.song-title, .song-singer, .song-album, .song-duration{
+    text-align: center;
+    color: rgb(255, 255, 255);
+}
+
+.song-title{
+    width: 30%;
+}
+
+.song-singer, .song-album{
+    width: 20%;
+    padding-right: 10px;
+}
+
+.song-duration{
+    width: 10%;
+    text-align: right;
+    color:  rgb(235, 233, 233);
+}
+
+.song-DL{
+    color: #a5a5a5;
+}
+
+.DL-icon{
+    display: inline;
+}
+
+/* .playerBar{
+    width: 350px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    background-color: rgba(000, 000, 000, 1);
+    bottom: 0;
+    position: absolute;
+} */
+
+.audio{
+    padding-left: 25px;
+    position: absolute;
+    bottom: 30px;
+    text-align: center;
+}
+
+audio:focus{
+    outline: none;
+}
